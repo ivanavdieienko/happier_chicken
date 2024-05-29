@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: be8c2bda8a8cb364fa1dda67976059c7
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - settings: {fileID: 11400000, guid: 213e8f3201158a640a6eb490d59900b8, type: 2}
+  - shopButton: {instanceID: 0}
+  - eggCount: {instanceID: 0}
+  - totalCount: {instanceID: 0}
+  - goldCount: {instanceID: 0}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
