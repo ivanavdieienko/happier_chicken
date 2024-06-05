@@ -1,14 +1,13 @@
 using System;
 using TMPro;
 using UnityEngine;
-using UnityEngine.Serialization;
 using UnityEngine.UI;
-using Zenject;
 
+[RequireComponent(typeof(Button))]
 public class ShopItem : MonoBehaviour
 {
     [SerializeField]
-    private Creatures creatureID;
+    private CreatureType creatureID;
 
     [SerializeField]
     private GameObject activeIcon;
@@ -19,21 +18,56 @@ public class ShopItem : MonoBehaviour
     [SerializeField]
     private TextMeshProUGUI priceField;
 
-    public void Initialize(int price, bool isPurchased, bool isActive)
+    private Action<ShopItem> OnClickCallback;
+
+    private Button clickArea;
+
+    public int Price{ get; private set; }
+
+    public void Initialize(int price, bool isPurchased, bool isActive, Action<ShopItem> callback)
     {
-        priceContainer.SetActive(!isPurchased);
-        activeIcon.SetActive(isActive);
+        IsPurchased(isPurchased);
+        IsActive(isActive);
+
+        OnClickCallback = callback;
+
+        Price = price;
+        priceField.text = price.ToString();
     }
 
-    // Start is called before the first frame update
-    void Start()
+    internal void IsActive(bool value)
     {
-
+        activeIcon.SetActive(value);
+        if (value)
+        {
+            priceContainer.SetActive(false);
+        }
     }
 
-    // Update is called once per frame
-    void Update()
+    public void IsPurchased(bool value)
     {
-        
+        priceContainer.SetActive(!value);
+    }
+
+    public void OnClick() => OnClickCallback(this);
+
+    void Awake()
+    {
+        clickArea = GetComponent<Button>();
+    }
+
+    void OnEnable()
+    {
+        clickArea.onClick.AddListener(OnClick);
+    }
+
+    void OnDisable()
+    {
+        clickArea.onClick.RemoveListener(OnClick);
+    }
+
+    void OnDestroy()
+    {
+        OnClickCallback = null;
     }
 }

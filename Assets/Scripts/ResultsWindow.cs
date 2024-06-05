@@ -1,21 +1,14 @@
-using System;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ResultsWindow : MonoBehaviour
+public class ResultsWindow : Window
 {
-    void Start()
+    [SerializeField]
+    private TextMeshProUGUI results;
+
+    public void SetText(string text)
     {
-        
-    }
-
-    void OnEnable()
-    {
-
-    }
-
-    void OnDisable()
-    {
-
+        results.text = text;
     }
 }

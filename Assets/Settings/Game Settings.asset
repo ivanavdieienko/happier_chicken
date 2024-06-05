@@ -13,12 +13,12 @@ MonoBehaviour:
   m_Name: Game Settings
   m_EditorClassIdentifier: 
   activeCreature:
-    name: chicken
-    reward: 1
-    price: 0
-    egg: {fileID: 1074327926338737556, guid: ff997b40967f0c24c9d59334d3765741, type: 3}
-    parent: {fileID: 8194810484093831755, guid: de5c5b253691ac54981e7989a730452c, type: 3}
-    inShop: {fileID: 0}
+    name: chicken2
+    reward: 2
+    price: 3150
+    egg: {fileID: 1074327926338737556, guid: 1ff3fc4432283c84cbe9f367dfabb995, type: 3}
+    parent: {fileID: 8194810484093831755, guid: 4b4e69834a7dd3e42ad9db5fadcafb0b, type: 3}
+    inShop: {fileID: 1913114105891096235, guid: 47e877ff2bae00841ad903c4f60cbf20, type: 3}
   Creatures:
   - name: chicken
     reward: 1
@@ -35,7 +35,7 @@ MonoBehaviour:
   - name: duck
     reward: 3
     price: 6300
-    egg: {fileID: 1074327926338737556, guid: 28d82893b88de08458c8aba110146e37, type: 3}
+    egg: {fileID: 1074327926338737556, guid: 23b4835d8041dd844976b58fff868fda, type: 3}
     parent: {fileID: 8194810484093831755, guid: 7d13ea866a73f20438849c84468bef19, type: 3}
     inShop: {fileID: 8005822741919413259, guid: 33efe040fc2a45d4fb012e345e706b05, type: 3}
   - name: turtle
@@ -67,19 +67,32 @@ MonoBehaviour:
     price: 201600
     egg: {fileID: 1074327926338737556, guid: a863bb2d2aa225e46985d9ffd04f2bf4, type: 3}
     parent: {fileID: 8194810484093831755, guid: 8b53edb3d745ec54fba75c771b0913d1, type: 3}
-    inShop: {fileID: 2087218154335566892, guid: 77b68410131c43246a556f2de9a0759b, type: 3}
-  uiPrefabs:
-  - name: shop
-    data: {fileID: 5669882671578429151, guid: 808eca20c5f4b484f9fe94b2edacd98c, type: 3}
+    inShop: {fileID: 1913114105891096235, guid: e8eb1681af89f2041a84bfbdd0a65f81, type: 3}
+  windows:
+  - {fileID: 1177852122850325512, guid: c1e725a052ef1ad4a922bc581eeb63f3, type: 3}
+  - {fileID: -6510788036798779786, guid: 808eca20c5f4b484f9fe94b2edacd98c, type: 3}
+  - {fileID: 4609610259712516434, guid: af205e18e3ce5d34cb54f2fd664ce065, type: 3}
   sounds:
-  - name: big
-    sound: {fileID: 8300000, guid: 8f13e6c3236dcfd4ebc15fe5efa2696e, type: 3}
-  - name: chick
-    sound: {fileID: 8300000, guid: 1177859eb3b1b454f8b0849306ac1e76, type: 3}
   - name: coins
     sound: {fileID: 8300000, guid: eb3d8d95b8852f94da0cb1c2cebcdb6c, type: 3}
   - name: down_egg
     sound: {fileID: 8300000, guid: a259c7c35927f4e44a0d5ab5c494c590, type: 3}
   - name: egg_broke
     sound: {fileID: 8300000, guid: bb32e3236926a404ea29ae50db7a60e9, type: 3}
-  gold: 2050
+  - name: chicken
+    sound: {fileID: 8300000, guid: 8f13e6c3236dcfd4ebc15fe5efa2696e, type: 3}
+  - name: chicken2
+    sound: {fileID: 8300000, guid: 8f13e6c3236dcfd4ebc15fe5efa2696e, type: 3}
+  - name: duck
+    sound: {fileID: 8300000, guid: aea8e3fc6183e484b903fef8cf70188f, type: 3}
+  - name: dino
+    sound: {fileID: 8300000, guid: ef02f7f601baa714a95aac35a97cba0d, type: 3}
+  - name: ostrich
+    sound: {fileID: 8300000, guid: d1cea9f72f7553e47a767d2f41919707, type: 3}
+  - name: penguin
+    sound: {fileID: 8300000, guid: cd6f1d22fcfbebf479af449f5bc1e3a1, type: 3}
+  - name: turtle
+    sound: {fileID: 8300000, guid: 9ea31f81d0343a14c8345c9badb5c869, type: 3}
+  - name: alien
+    sound: {fileID: 8300000, guid: b7371b2349d9e6249aea5445735153bc, type: 3}
+  gold: 0

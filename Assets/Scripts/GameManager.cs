@@ -2,64 +2,103 @@ using System.Collections.Generic;
 using DG.Tweening;
 using UnityEngine;
 
+public enum GameState
+{
+    AwaitingStart,
+    Playing,
+    Paused,
+    Ended,
+    ShowingResults
+}
+
 public class GameManager : MonoBehaviour
 {
-    // [SerializeField]
-    private GameObject currentPlayer;
-
     [SerializeField]
     GameSettings settings;
 
     [SerializeField]
     UIController ui;
 
+    [SerializeField]
+    private int gameDuration = 60;
+
+    private static GameManager instance;
     private static readonly int CHICK_CLUCK = Animator.StringToHash("chicken-cluck");
     private static readonly int EGG_SHAKING = Animator.StringToHash("egg-shaking");
     private Sequence playerAnimation;
-    private HashSet<Sequence> eggAnimations;
-    private HashSet<Sequence> babiesAnimations;
+    private readonly HashSet<Sequence> eggAnimations = new();
+    private readonly HashSet<Sequence> babiesAnimations  = new();
+    private GameObject currentPlayer;
     private int eggCount;
+    private int time;
+    private int nextUpdate;
 
-    private void StartGame()
+    private GameState State = GameState.AwaitingStart;
+
+    public static GameManager Instance => instance;
+
+    public void CollectReward()
     {
+        settings.Gold += eggCount * settings.GetCreatureReward();
+        currentPlayer.GetComponent<AudioSource>().PlayOneShot(settings.GetSound("coins"));
         eggCount = 0;
-        ui.SetEggCount(eggCount);
-        ui.StartGame();
     }
 
-    private void OnEndGame()
+    public void StartGame()
     {
-        settings.gold += eggCount * settings.GetCreatureReward();
+        time = gameDuration;
+        ui.SetEggCount(eggCount);
+        ui.StartGame();
+        State = GameState.Playing;
+    }
 
-        ui.SetGoldCount(settings.gold);
-        currentPlayer.GetComponent<AudioSource>().PlayOneShot(settings.GetSound("coins"));
+    private void EndGame()
+    {
+        ui.IsPlaying = false;
+        ui.UpdateGoldCount();
+        ui.SetEggCount(eggCount);
+        ui.ShowResults(eggCount);
+    }
 
-        settings.SaveSettings();
+    private void OnGoldChanged(int value)
+    {
+        SaveSettings();
+    }
+
+    private void OnCreatureChanged(Creature creature)
+    {
+        DestroyPlayer();
+        CreatePlayer();
+        SaveSettings();
     }
 
     void Awake()
     {
+        instance = this;
+
         DOTween.Init();
-        eggAnimations = new HashSet<Sequence>();
-        babiesAnimations = new HashSet<Sequence>();
+        LoadSettings();
+    }
 
-        currentPlayer = GameObject.Instantiate(settings.GetActiveCreaturePrefab(), transform.position, transform.rotation);
-
-        ui.SetGoldCount(settings.gold);
-        StartGame();
+    void Start()
+    {
+        CreatePlayer();
+        ui.ShowStart();
+        ui.UpdateGoldCount();
     }
 
     void OnEnable()
     {
-        ui.OnEndGame += OnEndGame;
+        settings.OnGoldChanged += OnGoldChanged;
+        settings.OnActiveCreatureChanged += OnCreatureChanged;
     }
 
     void OnDisable()
     {
-        ui.OnEndGame -= OnEndGame;
+        settings.OnGoldChanged -= OnGoldChanged;
+        settings.OnActiveCreatureChanged -= OnCreatureChanged;
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (!ui.IsPlaying)
@@ -81,6 +120,20 @@ public class GameManager : MonoBehaviour
         {
             HandleTouch(Input.mousePosition);
         }
+
+        if (Time.time >= nextUpdate)
+        {
+    		nextUpdate = Mathf.FloorToInt(Time.time) + 1;
+
+            ui.UpdateTime(time);
+
+            if (time == 0)
+            {
+                EndGame();
+            }
+
+            time--;
+    	}
     }
 
     void OnDestroy()
@@ -106,9 +159,43 @@ public class GameManager : MonoBehaviour
     private void HandleTouch(Vector3 position)
     {
         Vector2 position2D = Camera.main.ScreenToWorldPoint(position);
-
         MovePlayer(position2D);
         CreateEgg(position2D);
+    }
+
+    #region Settings
+
+    private void LoadSettings()
+    {
+        settings.Gold = PlayerPrefs.GetInt("gold");
+        var name = PlayerPrefs.GetString("activeCreature");
+        if (string.IsNullOrEmpty(name))
+        {
+            name = "chicken";
+        }
+        settings.SetActiveCreature(name);
+
+        var purchasesData = PlayerPrefs.GetInt("purchased");
+        if (purchasesData == 0) purchasesData = (int) CreatureType.CHICKEN;
+        settings.SetPurchasedCreatures(purchasesData);
+    }
+
+    private void SaveSettings()
+    {
+        PlayerPrefs.SetInt("gold", settings.Gold);
+        PlayerPrefs.SetString("activeCreature", currentPlayer.name);
+        PlayerPrefs.SetInt("purchased", settings.GetPurchasedCreatures);
+    }
+
+    #endregion
+
+    #region Player
+
+    private void CreatePlayer()
+    {
+        var prefab = settings.GetActiveCreaturePrefab();
+        currentPlayer = Instantiate(prefab, transform.position, transform.rotation);
+        currentPlayer.name = prefab.name;
     }
 
     private void MovePlayer(Vector3 position)
@@ -123,14 +210,25 @@ public class GameManager : MonoBehaviour
         animation.Append(currentPlayer.transform.DOMoveX(position.x + 1f,0.33f));
         animation.Append(currentPlayer.transform.DOMoveY(position.y,0.33f));
         animation.AppendCallback(() => currentPlayer.GetComponent<Animator>().Play(CHICK_CLUCK));
-        animation.AppendCallback(() => currentPlayer.GetComponent<AudioSource>().PlayOneShot(settings.GetSound("big")));
+        animation.AppendCallback(() => currentPlayer.GetComponent<AudioSource>().PlayOneShot(settings.GetSound(currentPlayer.name)));
 
         playerAnimation = animation;
     }
 
+    private void DestroyPlayer()
+    {
+        Destroy(currentPlayer);
+        foreach (var animation in eggAnimations) animation.Kill();
+        foreach (var animation in babiesAnimations) animation.Kill();
+        foreach (Transform child in transform) Destroy(child.gameObject);
+    }
+
+    #endregion
+
     private void CreateEgg(Vector2 position)
     {
         var egg = Instantiate(settings.GetEggPrefab(), position, Quaternion.identity);
+        egg.transform.parent = transform;
 
         Sequence animation = DOTween.Sequence();
         animation.AppendInterval(5f);
@@ -141,18 +239,20 @@ public class GameManager : MonoBehaviour
             sound.PlayOneShot(sound.clip);
         });
         animation.AppendInterval(0.5f);
-        animation.AppendCallback(() => GameObject.DestroyImmediate(egg));
+        animation.AppendCallback(() => Destroy(egg));
+        animation.AppendCallback(() => eggAnimations.Remove(animation));
         animation.AppendCallback(() => CreateBaby(position));
 
         eggAnimations.Add(animation);
 
-        ui.SetEggCount(++eggCount);
+        ui.SetEggCount(eggCount++);
     }
 
     private void CreateBaby(Vector2 position)
     {
-        var baby = GameObject.Instantiate(settings.GetActiveCreaturePrefab(), position, Quaternion.identity);
+        var baby = Instantiate(settings.GetActiveCreaturePrefab(), position, Quaternion.identity);
         baby.transform.localScale = Vector2.one * 0.5f;
+        baby.transform.parent = transform;
         Sequence animation = DOTween.Sequence();
         animation.AppendCallback(() => baby.GetComponent<Animator>().Play(CHICK_CLUCK));
         animation.AppendCallback(() => {
@@ -160,7 +260,8 @@ public class GameManager : MonoBehaviour
             sound.PlayOneShot(sound.clip);
         });
         animation.Append(baby.transform.DOMoveX(-5, 5f));
-        animation.AppendCallback(() => GameObject.DestroyImmediate(baby));
+        animation.AppendCallback(() => Destroy(baby));
+        animation.AppendCallback(() => babiesAnimations.Remove(animation));
 
         babiesAnimations.Add(animation);
     }
