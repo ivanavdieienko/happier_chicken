@@ -233,12 +233,12 @@ public class GameManager : MonoBehaviour
         Sequence animation = DOTween.Sequence();
         animation.AppendInterval(5f);
         animation.AppendCallback(() => egg.GetComponent<Animator>().Play(EGG_SHAKING));
-        animation.AppendInterval(0.5f);
+        animation.AppendInterval(0.3f);
         animation.AppendCallback(() => {
             var sound = egg.GetComponent<AudioSource>();
             sound.PlayOneShot(sound.clip);
         });
-        animation.AppendInterval(0.5f);
+        animation.AppendInterval(0.7f);
         animation.AppendCallback(() => Destroy(egg));
         animation.AppendCallback(() => eggAnimations.Remove(animation));
         animation.AppendCallback(() => CreateBaby(position));

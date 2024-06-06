@@ -12,26 +12,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5438c6c9e8f11374ea7dfb8691beb6cc, type: 3}
   m_Name: Game Settings
   m_EditorClassIdentifier: 
+  gameTime: 0
   activeCreature:
     name: chicken2
     reward: 2
     price: 3150
     egg: {fileID: 1074327926338737556, guid: 1ff3fc4432283c84cbe9f367dfabb995, type: 3}
-    parent: {fileID: 8194810484093831755, guid: 4b4e69834a7dd3e42ad9db5fadcafb0b, type: 3}
-    inShop: {fileID: 1913114105891096235, guid: 47e877ff2bae00841ad903c4f60cbf20, type: 3}
+    parent: {fileID: 8194810484093831755, guid: 0c1cb1455aef0334e8c7adb41e94169f, type: 3}
+    inShop: {fileID: 7672046136753902822, guid: 35393983bd6cdc842b75fb212b3d18f9, type: 3}
   Creatures:
   - name: chicken
     reward: 1
     price: 0
     egg: {fileID: 1074327926338737556, guid: ff997b40967f0c24c9d59334d3765741, type: 3}
     parent: {fileID: 8194810484093831755, guid: de5c5b253691ac54981e7989a730452c, type: 3}
-    inShop: {fileID: 7672046136753902822, guid: 35393983bd6cdc842b75fb212b3d18f9, type: 3}
+    inShop: {fileID: 7672046136753902822, guid: e58dfb9ec1d15914cb1c2e350256934b, type: 3}
   - name: chicken2
     reward: 2
     price: 3150
     egg: {fileID: 1074327926338737556, guid: 1ff3fc4432283c84cbe9f367dfabb995, type: 3}
-    parent: {fileID: 8194810484093831755, guid: 4b4e69834a7dd3e42ad9db5fadcafb0b, type: 3}
-    inShop: {fileID: 1913114105891096235, guid: 47e877ff2bae00841ad903c4f60cbf20, type: 3}
+    parent: {fileID: 8194810484093831755, guid: 0c1cb1455aef0334e8c7adb41e94169f, type: 3}
+    inShop: {fileID: 7672046136753902822, guid: 35393983bd6cdc842b75fb212b3d18f9, type: 3}
   - name: duck
     reward: 3
     price: 6300
@@ -95,4 +96,3 @@ MonoBehaviour:
     sound: {fileID: 8300000, guid: 9ea31f81d0343a14c8345c9badb5c869, type: 3}
   - name: alien
     sound: {fileID: 8300000, guid: b7371b2349d9e6249aea5445735153bc, type: 3}
-  gold: 0
