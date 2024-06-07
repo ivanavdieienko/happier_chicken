@@ -56,5 +56,6 @@
         "temp/": true,
         "Temp/": true
     },
-    "dotnet.defaultSolution": "happier_chicken.sln"
+    "dotnet.defaultSolution": "happier_chicken.sln",
+    "dotnet.preferCSharpExtension": true
 }
