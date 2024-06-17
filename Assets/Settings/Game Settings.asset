@@ -14,61 +14,109 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gameTime: 0
   activeCreature:
-    name: chicken2
-    reward: 2
-    price: 3150
-    egg: {fileID: 1074327926338737556, guid: 1ff3fc4432283c84cbe9f367dfabb995, type: 3}
-    parent: {fileID: 8194810484093831755, guid: 0c1cb1455aef0334e8c7adb41e94169f, type: 3}
-    inShop: {fileID: 7672046136753902822, guid: 35393983bd6cdc842b75fb212b3d18f9, type: 3}
+    name: chicken
+    reward: 1
+    price: 0
+    egg: {fileID: 1074327926338737556, guid: ff997b40967f0c24c9d59334d3765741, type: 3}
+    parent: {fileID: 1685880224048609371, guid: de5c5b253691ac54981e7989a730452c, type: 3}
+    inShop: {fileID: 1818550414201324473, guid: 00924e270ea692547b6796125e623079, type: 3}
   Creatures:
   - name: chicken
     reward: 1
     price: 0
     egg: {fileID: 1074327926338737556, guid: ff997b40967f0c24c9d59334d3765741, type: 3}
-    parent: {fileID: 8194810484093831755, guid: de5c5b253691ac54981e7989a730452c, type: 3}
-    inShop: {fileID: 7672046136753902822, guid: e58dfb9ec1d15914cb1c2e350256934b, type: 3}
+    parent: {fileID: 1685880224048609371, guid: de5c5b253691ac54981e7989a730452c, type: 3}
+    inShop: {fileID: 1818550414201324473, guid: 00924e270ea692547b6796125e623079, type: 3}
   - name: chicken2
     reward: 2
     price: 3150
     egg: {fileID: 1074327926338737556, guid: 1ff3fc4432283c84cbe9f367dfabb995, type: 3}
     parent: {fileID: 8194810484093831755, guid: 0c1cb1455aef0334e8c7adb41e94169f, type: 3}
-    inShop: {fileID: 7672046136753902822, guid: 35393983bd6cdc842b75fb212b3d18f9, type: 3}
+    inShop: {fileID: 1818550414201324473, guid: 1856f41c9d33ecd4a9d96612b38caf4e, type: 3}
   - name: duck
     reward: 3
     price: 6300
     egg: {fileID: 1074327926338737556, guid: 23b4835d8041dd844976b58fff868fda, type: 3}
     parent: {fileID: 8194810484093831755, guid: 7d13ea866a73f20438849c84468bef19, type: 3}
-    inShop: {fileID: 8005822741919413259, guid: 33efe040fc2a45d4fb012e345e706b05, type: 3}
+    inShop: {fileID: 1818550414201324473, guid: 38d887002c7043b449a08b3ce8cb4a23, type: 3}
   - name: turtle
     reward: 4
     price: 12600
     egg: {fileID: 1074327926338737556, guid: e231d4fd6e9a91148aff9a9aa83aaf57, type: 3}
     parent: {fileID: 8194810484093831755, guid: b9c91e623c6202b449110570d2b6b922, type: 3}
-    inShop: {fileID: 3966310072586344720, guid: dd217128e5c11924abcac20f467fd64e, type: 3}
+    inShop: {fileID: 1818550414201324473, guid: 28364eeb3509abe4d9a29628d10fa0ed, type: 3}
   - name: ostrich
     reward: 5
     price: 25200
     egg: {fileID: 1074327926338737556, guid: 0516425bfd6ed5e42bc1caf47a729f7f, type: 3}
     parent: {fileID: 8194810484093831755, guid: c8b81176389c7f44992f4b268984f9ca, type: 3}
-    inShop: {fileID: 8442259136542441578, guid: f5d713b3ea6bedf44a244ce4a22517c0, type: 3}
-  - name: penguin
+    inShop: {fileID: 1818550414201324473, guid: f87a62740b3127c40a74df0fdbc80df6, type: 3}
+  - name: frog
     reward: 6
     price: 50400
-    egg: {fileID: 1074327926338737556, guid: b086eade2aa4cf247ae2228560921e3d, type: 3}
-    parent: {fileID: 8194810484093831755, guid: 40ef6209dd953754593c8837a2651dd8, type: 3}
-    inShop: {fileID: 9067791386259035876, guid: 677762b60981a0740b51435b717b305a, type: 3}
-  - name: dino
+    egg: {fileID: 1074327926338737556, guid: 12c20c8aca9075448ac3ddf8ef5aac78, type: 3}
+    parent: {fileID: 8194810484093831755, guid: ea2fe9bab4348a44e8b8fc249f0fae11, type: 3}
+    inShop: {fileID: 1818550414201324473, guid: d46d6bd07865fba469876d7c0b8a729d, type: 3}
+  - name: penguin
     reward: 7
     price: 100800
-    egg: {fileID: 1074327926338737556, guid: 28d82893b88de08458c8aba110146e37, type: 3}
-    parent: {fileID: 8194810484093831755, guid: b58051c5969657b4889992a2a0f05a19, type: 3}
-    inShop: {fileID: 7067303976576120686, guid: 16a3db8c941a46d4383212906d890a4c, type: 3}
-  - name: alien
+    egg: {fileID: 1074327926338737556, guid: b086eade2aa4cf247ae2228560921e3d, type: 3}
+    parent: {fileID: 8194810484093831755, guid: 40ef6209dd953754593c8837a2651dd8, type: 3}
+    inShop: {fileID: 1818550414201324473, guid: 048956f88b133ec40be59e844313f226, type: 3}
+  - name: dino
     reward: 8
     price: 201600
+    egg: {fileID: 1074327926338737556, guid: 28d82893b88de08458c8aba110146e37, type: 3}
+    parent: {fileID: 8194810484093831755, guid: b58051c5969657b4889992a2a0f05a19, type: 3}
+    inShop: {fileID: 1818550414201324473, guid: 8c3fbea38254e224994cff7d1c510ce8, type: 3}
+  - name: alien
+    reward: 9
+    price: 403200
     egg: {fileID: 1074327926338737556, guid: a863bb2d2aa225e46985d9ffd04f2bf4, type: 3}
-    parent: {fileID: 8194810484093831755, guid: 8b53edb3d745ec54fba75c771b0913d1, type: 3}
-    inShop: {fileID: 1913114105891096235, guid: e8eb1681af89f2041a84bfbdd0a65f81, type: 3}
+    parent: {fileID: 4207405788842372100, guid: 8b53edb3d745ec54fba75c771b0913d1, type: 3}
+    inShop: {fileID: 1818550414201324473, guid: b96220822bb2c0b419fa63f3bfa8e673, type: 3}
+  - name: lizzard
+    reward: 10
+    price: 806400
+    egg: {fileID: 1074327926338737556, guid: be4d5c88b2ade4748aaa623dd2b59f70, type: 3}
+    parent: {fileID: 8194810484093831755, guid: 71f28a4921c45e143933afc1e426ce99, type: 3}
+    inShop: {fileID: 1818550414201324473, guid: ae85f445db08a3d4882b8c255f0007ad, type: 3}
+  - name: platipus
+    reward: 11
+    price: 806400
+    egg: {fileID: 1074327926338737556, guid: 917aa1ca722edce498717d9ccc236972, type: 3}
+    parent: {fileID: 8194810484093831755, guid: 5cedd953f8b8cdc41b9acb87d20ea9b3, type: 3}
+    inShop: {fileID: 1818550414201324473, guid: 1d9d45b94ab700940b8f6aa873c84448, type: 3}
+  - name: echidna
+    reward: 12
+    price: 1612800
+    egg: {fileID: 1074327926338737556, guid: 051426014fc0b444ba803fa41681de54, type: 3}
+    parent: {fileID: 8194810484093831755, guid: 16fb6c9f0fa354a49939b91e959b757c, type: 3}
+    inShop: {fileID: 1818550414201324473, guid: db419214cb41fbb4588d7b96a8b58e20, type: 3}
+  - name: snake
+    reward: 13
+    price: 3225600
+    egg: {fileID: 1074327926338737556, guid: b098471decd192e4d8063861a881210b, type: 3}
+    parent: {fileID: 8194810484093831755, guid: bb49fe9dd1a69024a857d6869dca0949, type: 3}
+    inShop: {fileID: 1818550414201324473, guid: ffa9047c74ec8f5488711565eed04da0, type: 3}
+  - name: snail
+    reward: 14
+    price: 6451200
+    egg: {fileID: 1074327926338737556, guid: b098471decd192e4d8063861a881210b, type: 3}
+    parent: {fileID: 8194810484093831755, guid: 588cbdf3c237f53429da42c1bcef57f1, type: 3}
+    inShop: {fileID: 1818550414201324473, guid: bf1f2e23105845e41890d8f33e3470d9, type: 3}
+  - name: oyster
+    reward: 15
+    price: 12902400
+    egg: {fileID: 1074327926338737556, guid: 907d74d21ba156a4393b00f89b6cb533, type: 3}
+    parent: {fileID: 8194810484093831755, guid: b745a53008fca2b4393ef9b0251d59bc, type: 3}
+    inShop: {fileID: 1818550414201324473, guid: e7e8d623d3224254a99807271de21ed6, type: 3}
+  - name: butterfly
+    reward: 16
+    price: 25804800
+    egg: {fileID: 1074327926338737556, guid: 2963db2b78212174aa0a020bc0959634, type: 3}
+    parent: {fileID: 8194810484093831755, guid: b254c9788f9db8747a348e9ed8d48e66, type: 3}
+    inShop: {fileID: 1818550414201324473, guid: 4f7ea63c5c74d1143b9b391623bd8288, type: 3}
   windows:
   - {fileID: 1177852122850325512, guid: c1e725a052ef1ad4a922bc581eeb63f3, type: 3}
   - {fileID: -6510788036798779786, guid: 808eca20c5f4b484f9fe94b2edacd98c, type: 3}

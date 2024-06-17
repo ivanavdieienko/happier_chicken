@@ -72,6 +72,8 @@ public class GameManager : MonoBehaviour
         SaveSettings();
     }
 
+    #region Unity lifecycle
+
     void Awake()
     {
         instance = this;
@@ -143,6 +145,8 @@ public class GameManager : MonoBehaviour
         DestroyAnimation(eggAnimations);
         DestroyAnimation(babiesAnimations);
     }
+
+    #endregion
 
     private void DestroyAnimation(HashSet<Sequence> animations)
     {
@@ -259,7 +263,7 @@ public class GameManager : MonoBehaviour
             var sound = baby.GetComponent<AudioSource>();
             sound.PlayOneShot(sound.clip);
         });
-        animation.Append(baby.transform.DOMoveX(-5, 5f));
+        animation.Append(baby.transform.DOMoveX(-3.5f, 5f));
         animation.AppendCallback(() => Destroy(baby));
         animation.AppendCallback(() => babiesAnimations.Remove(animation));
 
