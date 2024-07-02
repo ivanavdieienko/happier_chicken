@@ -279,9 +279,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8194810484093831757}
+  - component: {fileID: 2634663415575393424}
   - component: {fileID: 2482827816505896736}
   - component: {fileID: -5633927610154839205}
-  - component: {fileID: 2634663415575393424}
   m_Layer: 7
   m_Name: dino
   m_TagString: Untagged
@@ -305,6 +305,22 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!111 &2634663415575393424
+Animation:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8194810484093831755}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Animation: {fileID: 7400000, guid: 0436bedf895de4a4b915d522f2c80ef2, type: 2}
+  m_Animations:
+  - {fileID: 7400000, guid: 0436bedf895de4a4b915d522f2c80ef2, type: 2}
+  m_WrapMode: 0
+  m_PlayAutomatically: 1
+  m_AnimatePhysics: 0
+  m_CullingType: 0
 --- !u!210 &2482827816505896736
 SortingGroup:
   m_ObjectHideFlags: 0
@@ -412,19 +428,3 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!111 &2634663415575393424
-Animation:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8194810484093831755}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Animation: {fileID: 7400000, guid: 0436bedf895de4a4b915d522f2c80ef2, type: 2}
-  m_Animations:
-  - {fileID: 7400000, guid: 0436bedf895de4a4b915d522f2c80ef2, type: 2}
-  m_WrapMode: 0
-  m_PlayAutomatically: 1
-  m_AnimatePhysics: 0
-  m_CullingType: 0

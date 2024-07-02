@@ -23,7 +23,8 @@ public class GameManager : MonoBehaviour
     private int gameDuration = 60;
 
     private static GameManager instance;
-    private static readonly int CHICK_CLUCK = Animator.StringToHash("chicken-cluck");
+    private static readonly int RUNS = Animator.StringToHash("runs");
+    private static readonly int CLUCK = Animator.StringToHash("cluck");
     private static readonly int EGG_SHAKING = Animator.StringToHash("egg-shaking");
     private Sequence playerAnimation;
     private readonly HashSet<Sequence> eggAnimations = new();
@@ -162,9 +163,9 @@ public class GameManager : MonoBehaviour
 
     private void HandleTouch(Vector3 position)
     {
-        Vector2 position2D = Camera.main.ScreenToWorldPoint(position);
-        MovePlayer(position2D);
-        CreateEgg(position2D);
+        Vector2 position3D = Camera.main.ScreenToWorldPoint(position);
+        MovePlayer(position3D);
+        CreateEgg(position3D);
     }
 
     #region Settings
@@ -198,7 +199,7 @@ public class GameManager : MonoBehaviour
     private void CreatePlayer()
     {
         var prefab = settings.GetActiveCreaturePrefab();
-        currentPlayer = Instantiate(prefab, transform.position, transform.rotation);
+        currentPlayer = Instantiate(prefab);
         currentPlayer.name = prefab.name;
     }
 
@@ -213,7 +214,7 @@ public class GameManager : MonoBehaviour
         animation.Append(currentPlayer.transform.DOMoveY(position.y + 1f,0.33f));
         animation.Append(currentPlayer.transform.DOMoveX(position.x + 1f,0.33f));
         animation.Append(currentPlayer.transform.DOMoveY(position.y,0.33f));
-        animation.AppendCallback(() => currentPlayer.GetComponent<Animator>().Play(CHICK_CLUCK));
+        animation.AppendCallback(() => currentPlayer.GetComponent<Animator>().Play(CLUCK));
         animation.AppendCallback(() => currentPlayer.GetComponent<AudioSource>().PlayOneShot(settings.GetSound(currentPlayer.name)));
 
         playerAnimation = animation;
@@ -229,7 +230,7 @@ public class GameManager : MonoBehaviour
 
     #endregion
 
-    private void CreateEgg(Vector2 position)
+    private void CreateEgg(Vector3 position)
     {
         var egg = Instantiate(settings.GetEggPrefab(), position, Quaternion.identity);
         egg.transform.parent = transform;
@@ -252,13 +253,13 @@ public class GameManager : MonoBehaviour
         ui.SetEggCount(eggCount++);
     }
 
-    private void CreateBaby(Vector2 position)
+    private void CreateBaby(Vector3 position)
     {
         var baby = Instantiate(settings.GetActiveCreaturePrefab(), position, Quaternion.identity);
         baby.transform.localScale = Vector2.one * 0.5f;
         baby.transform.parent = transform;
         Sequence animation = DOTween.Sequence();
-        animation.AppendCallback(() => baby.GetComponent<Animator>().Play(CHICK_CLUCK));
+        animation.AppendCallback(() => baby.GetComponent<Animator>().Play(RUNS));
         animation.AppendCallback(() => {
             var sound = baby.GetComponent<AudioSource>();
             sound.PlayOneShot(sound.clip);

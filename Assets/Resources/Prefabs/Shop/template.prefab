@@ -63,7 +63,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4dd469dae8ed21a4d8f9c7123ee89442, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  creatureID: 128
+  creatureID: 0
   activeIcon: {fileID: 7445851860561849760}
   priceContainer: {fileID: 2243579015696216046}
   priceField: {fileID: 6104105672430031758}

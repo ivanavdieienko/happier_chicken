@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4895505150301584257}
   - component: {fileID: 8215156331689672365}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: mask
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -96,6 +96,7 @@ GameObject:
   - component: {fileID: 5240177543288240704}
   - component: {fileID: 1639837176}
   - component: {fileID: 7173496217360048655}
+  - component: {fileID: 3961965389053470617}
   m_Layer: 6
   m_Name: oyster-egg
   m_TagString: Untagged
@@ -288,3 +289,14 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!210 &3961965389053470617
+SortingGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1074327926338737556}
+  m_Enabled: 1
+  m_SortingLayerID: 412733567
+  m_SortingLayer: 1
+  m_SortingOrder: 0

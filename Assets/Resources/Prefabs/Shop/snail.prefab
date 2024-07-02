@@ -85,11 +85,23 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -7278194231658986663, guid: 0fcc8835478174f4ea817fd5ca44aa5f, type: 3}
       propertyPath: creatureID
-      value: 1
+      value: 8192
       objectReference: {fileID: 0}
     - target: {fileID: 1913114105891096235, guid: 0fcc8835478174f4ea817fd5ca44aa5f, type: 3}
       propertyPath: m_Name
       value: snail
+      objectReference: {fileID: 0}
+    - target: {fileID: 7118022446926794157, guid: 0fcc8835478174f4ea817fd5ca44aa5f, type: 3}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7118022446926794157, guid: 0fcc8835478174f4ea817fd5ca44aa5f, type: 3}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7118022446926794157, guid: 0fcc8835478174f4ea817fd5ca44aa5f, type: 3}
+      propertyPath: m_Color.r
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7865782715760167542, guid: 0fcc8835478174f4ea817fd5ca44aa5f, type: 3}
       propertyPath: m_Pivot.x

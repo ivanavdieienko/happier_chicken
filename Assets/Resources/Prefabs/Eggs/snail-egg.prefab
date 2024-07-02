@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 4939006749524142747}
   - component: {fileID: 1639837176}
   - component: {fileID: 7173496217360048655}
+  - component: {fileID: 1479918104564612246}
   m_Layer: 6
   m_Name: snail-egg
   m_TagString: Untagged
@@ -152,6 +153,17 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!210 &1479918104564612246
+SortingGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1074327926338737556}
+  m_Enabled: 1
+  m_SortingLayerID: 412733567
+  m_SortingLayer: 1
+  m_SortingOrder: 0
 --- !u!1 &4204463239493138936
 GameObject:
   m_ObjectHideFlags: 0

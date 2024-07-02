@@ -2,6 +2,27 @@
 using System.Linq;
 using UnityEngine;
 
+public enum CreatureType
+{
+    NONE = 0,
+    CHICKEN = 1,
+    CHICKEN2 = 2,
+    DUCK = 4,
+    TURTLE = 8,
+    OSTRICH = 16,
+    PENGUIN = 32,
+    DINO = 64,
+    ALIEN = 128,
+    FROG = 256,
+    LIZZARD = 512,
+    PLATIPUS = 1024,
+    ECHIDNA = 2048,
+    SNAKE = 4096,
+    SNAIL = 8192,
+    OYSTER = 16384,
+    BUTTERFLY = 32768
+}
+
 [Serializable]
 public struct Creature
 {

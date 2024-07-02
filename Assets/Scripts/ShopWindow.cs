@@ -4,19 +4,6 @@ using DG.Tweening.Plugins.Options;
 using TMPro;
 using UnityEngine;
 
-public enum CreatureType
-{
-    NONE = 0,
-    CHICKEN = 1,
-    CHICKEN2 = 2,
-    DUCK = 4,
-    TURTLE = 8,
-    OSTRICH = 16,
-    PENGUIN = 32,
-    DINO = 64,
-    ALIEN = 128
-}
-
 public class ShopWindow : Window
 {
     [SerializeField]

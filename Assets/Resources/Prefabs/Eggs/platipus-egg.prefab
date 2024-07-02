@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 4939006749524142747}
   - component: {fileID: 1639837176}
   - component: {fileID: -292002373482769489}
+  - component: {fileID: 8878137239108141108}
   m_Layer: 6
   m_Name: platipus-egg
   m_TagString: Untagged
@@ -152,6 +153,17 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!210 &8878137239108141108
+SortingGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1074327926338737556}
+  m_Enabled: 1
+  m_SortingLayerID: 412733567
+  m_SortingLayer: 1
+  m_SortingOrder: 0
 --- !u!1 &7959594358863584399
 GameObject:
   m_ObjectHideFlags: 0
@@ -162,7 +174,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2498350237799051099}
   - component: {fileID: 6186379321241285325}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: main
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -246,7 +258,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3408982245990185857}
   - component: {fileID: 1250053305584033234}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: mask
   m_TagString: Untagged
   m_Icon: {fileID: 0}

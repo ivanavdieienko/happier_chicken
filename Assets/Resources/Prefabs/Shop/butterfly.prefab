@@ -85,7 +85,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -7278194231658986663, guid: 0fcc8835478174f4ea817fd5ca44aa5f, type: 3}
       propertyPath: creatureID
-      value: 1
+      value: 32768
       objectReference: {fileID: 0}
     - target: {fileID: 1913114105891096235, guid: 0fcc8835478174f4ea817fd5ca44aa5f, type: 3}
       propertyPath: m_Name

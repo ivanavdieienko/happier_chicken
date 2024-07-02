@@ -156,10 +156,21 @@ public class UIController : MonoBehaviour
 
             UpdateGoldCount();
         }
-
-        if (Input.GetKey(KeyCode.LeftControl) && Input.GetKey(KeyCode.LeftAlt) && Input.GetKeyDown(KeyCode.D))
+        else if (Input.GetKey(KeyCode.LeftControl) && Input.GetKey(KeyCode.LeftAlt) && Input.GetKeyDown(KeyCode.D))
         {
             settings.Gold += 10000;
+
+            UpdateGoldCount();
+        }
+        else if (Input.GetKey(KeyCode.LeftControl) && Input.GetKey(KeyCode.LeftAlt) && Input.GetKeyDown(KeyCode.T))
+        {
+            settings.Gold += 100000;
+
+            UpdateGoldCount();
+        }
+        else if (Input.GetKey(KeyCode.LeftControl) && Input.GetKey(KeyCode.LeftAlt) && Input.GetKeyDown(KeyCode.M))
+        {
+            settings.Gold += 100000;
 
             UpdateGoldCount();
         }
