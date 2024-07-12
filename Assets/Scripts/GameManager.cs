@@ -2,15 +2,6 @@ using System.Collections.Generic;
 using DG.Tweening;
 using UnityEngine;
 
-public enum GameState
-{
-    AwaitingStart,
-    Playing,
-    Paused,
-    Ended,
-    ShowingResults
-}
-
 public class GameManager : MonoBehaviour
 {
     [SerializeField]
@@ -34,13 +25,11 @@ public class GameManager : MonoBehaviour
     private int time;
     private int nextUpdate;
 
-    private GameState State = GameState.AwaitingStart;
-
     public static GameManager Instance => instance;
 
-    public void CollectReward()
+    public void CollectReward(int multiplier = 1)
     {
-        settings.Gold += eggCount * settings.GetCreatureReward();
+        settings.Gold += eggCount * settings.GetCreatureReward() * multiplier;
         currentPlayer.GetComponent<AudioSource>().PlayOneShot(settings.GetSound("coins"));
         eggCount = 0;
     }
@@ -49,8 +38,7 @@ public class GameManager : MonoBehaviour
     {
         time = gameDuration;
         ui.SetEggCount(eggCount);
-        ui.StartGame();
-        State = GameState.Playing;
+        ui.IsPlaying = true;
     }
 
     private void EndGame()
@@ -58,7 +46,15 @@ public class GameManager : MonoBehaviour
         ui.IsPlaying = false;
         ui.UpdateGoldCount();
         ui.SetEggCount(eggCount);
-        ui.ShowResults(eggCount);
+        if (eggCount > settings.HighScore)
+        {
+            settings.UpdateHighscore(eggCount);
+            ui.ShowLeaderboard();
+        }
+        else
+        {
+            ui.ShowResults(eggCount);
+        }
     }
 
     private void OnGoldChanged(int value)
@@ -183,6 +179,8 @@ public class GameManager : MonoBehaviour
         var purchasesData = PlayerPrefs.GetInt("purchased");
         if (purchasesData == 0) purchasesData = (int) CreatureType.CHICKEN;
         settings.SetPurchasedCreatures(purchasesData);
+
+        settings.UpdateHighscore(PlayerPrefs.GetInt("highscore"));
     }
 
     private void SaveSettings()
@@ -190,6 +188,7 @@ public class GameManager : MonoBehaviour
         PlayerPrefs.SetInt("gold", settings.Gold);
         PlayerPrefs.SetString("activeCreature", currentPlayer.name);
         PlayerPrefs.SetInt("purchased", settings.GetPurchasedCreatures);
+        PlayerPrefs.SetInt("highscore", settings.HighScore);
     }
 
     #endregion
@@ -250,7 +249,7 @@ public class GameManager : MonoBehaviour
 
         eggAnimations.Add(animation);
 
-        ui.SetEggCount(eggCount++);
+        ui.SetEggCount(++eggCount);
     }
 
     private void CreateBaby(Vector3 position)

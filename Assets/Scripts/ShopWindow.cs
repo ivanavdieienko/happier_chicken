@@ -14,6 +14,14 @@ public class ShopWindow : Window
 
     private TweenerCore<Color, Color, ColorOptions> errorAnimation;
 
+    public override void Show()
+    {
+        base.Show();
+        
+        var rect = GetComponent<RectTransform>();
+        rect.sizeDelta = Vector2.zero;
+    }
+
     void Awake()
     {
         var activeCreature = settings.GetActiveCreaturePrefab();

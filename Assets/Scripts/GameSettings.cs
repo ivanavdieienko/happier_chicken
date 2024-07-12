@@ -61,6 +61,9 @@ public class GameSettings : ScriptableObject
     private int purchasedCreatures = (int) CreatureType.CHICKEN;
 
     private int gold;
+    private int high_score;
+
+    public int HighScore => high_score;
 
     public int Gold { get => gold; set { gold = value; OnGoldChanged?.Invoke(value); } }
 
@@ -109,5 +112,15 @@ public class GameSettings : ScriptableObject
             data =  (int) CreatureType.CHICKEN;
 
         purchasedCreatures = data;
+    }
+
+    public void UpdateHighscore(int score)
+    {
+        if (score <= high_score)
+        {
+            return;
+        }
+
+        high_score = score;
     }
 }

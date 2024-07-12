@@ -10,7 +10,17 @@ public abstract class Window : MonoBehaviour
     [SerializeField]
     protected Button btnClose;
 
-    public Action<Window> OnClose;
+    public event Action<Window> OnClose;
+
+    public virtual void Show()
+    {
+        gameObject.SetActive(true);
+    }
+
+    public virtual void Hide()
+    {
+        gameObject.SetActive(false);
+    }
 
     protected virtual void OnEnable()
     {
@@ -24,7 +34,7 @@ public abstract class Window : MonoBehaviour
 
     protected virtual void OnCloseClick()
     {
-        OnClose(this);
-        Destroy(this.gameObject);
+        OnClose?.Invoke(this);
+        Hide();
     }
 }
