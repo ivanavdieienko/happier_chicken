@@ -41,7 +41,8 @@ public class ShopWindow : Window
 
     override protected void OnDisable()
     {
-        errorAnimation.Kill();
+        errorAnimation?.Kill();
+        ResetErrorMessage();
     }
 
     public void OnItemClick(ShopItem item)
@@ -51,7 +52,7 @@ public class ShopWindow : Window
             return;
         }
 
-        errorAnimation.Kill();
+        errorAnimation?.Kill();
         ResetErrorMessage();
 
         if (!settings.IsPurchased(item.name))
