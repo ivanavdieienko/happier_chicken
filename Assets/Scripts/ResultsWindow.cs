@@ -7,6 +7,12 @@ public class ResultsWindow : Window
     private TextMeshProUGUI results;
 
     [SerializeField]
+    private TextMeshProUGUI collectx2;
+
+    [SerializeField]
+    private TextMeshProUGUI collect;
+
+    [SerializeField]
     private RewardedAdsButton btnCollectX2;
 
     [SerializeField]
@@ -27,7 +33,12 @@ public class ResultsWindow : Window
 
         UpdateRewardsText();
         Show();
-        AppRating.Instance.RateAndReview();
+
+        if (!settings.RateUsShown)
+        {
+            AppRating.Instance.RateAndReview();
+            settings.SetRateUsShown(1);
+        }
     }
 
     private void UpdateRewardsText()
@@ -61,6 +72,10 @@ public class ResultsWindow : Window
         {
             OnAdsInitialized();
         }
+
+        var collect_txt = Localization.Get(Localization.Collect);
+        collectx2.text = collect_txt;
+        collect.text = collect_txt;
     }
 
     override protected void OnEnable()
@@ -72,9 +87,6 @@ public class ResultsWindow : Window
         if (adsInitialized)
         {
             btnCollectX2.OnGrantReward += OnGrantReward;
-        }
-        else{
-
         }
         btnCollectX2.gameObject.SetActive(adsInitialized);
     }

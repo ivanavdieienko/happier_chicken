@@ -52,6 +52,8 @@ public class UIController : MonoBehaviour
 
     private bool isPlaying;
 
+    #region Fields
+
     public bool IsPlaying
     {
         get { return isPlaying; }
@@ -78,6 +80,8 @@ public class UIController : MonoBehaviour
     private Window GetWindow(WindowType type) => windows.Where(data => data.type == type).First().window;
 
     private void UpdateBalance(int value) => goldCount.text = value.ToString();
+
+    #endregion
 
     #region Start Window
 

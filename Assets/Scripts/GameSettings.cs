@@ -44,13 +44,11 @@ public struct SoundData
 [CreateAssetMenu]
 public class GameSettings : ScriptableObject
 {
-    [SerializeField] int gameTime;
+    #region Fields
 
     [SerializeField] Creature activeCreature;
 
     public Creature[] Creatures;
-
-    [SerializeField] Window[] windows;
 
     [SerializeField] SoundData[] sounds;
 
@@ -58,18 +56,58 @@ public class GameSettings : ScriptableObject
     public event Action<Creature> OnActiveCreatureChanged;
     public event Action<CreatureType> OnCreaturePurchased;
 
-    private int purchasedCreatures = (int) CreatureType.CHICKEN;
+    private int purchasedCreatures = (int)CreatureType.CHICKEN;
 
     private int gold;
-    private int high_score;
+    private int highScore;
+    private int rateUsShown;
 
-    public int HighScore => high_score;
+    #endregion
+
+    #region Properties
+
+    public int HighScore => highScore;
+
+    public bool RateUsShown => rateUsShown > 0;
+
+    public int PurchasedCreatures => purchasedCreatures;
 
     public int Gold { get => gold; set { gold = value; OnGoldChanged?.Invoke(value); } }
 
     public GameObject GetEggPrefab() => activeCreature.egg;
 
     public GameObject GetActiveCreaturePrefab() => activeCreature.parent;
+
+    public int GetCreatureReward() => activeCreature.reward;
+
+    public Creature GetCreature(string name) => Creatures.Where(data => data.name == name).First();
+
+    public bool IsPurchased(int creatureID) => (purchasedCreatures & creatureID) > 0;
+
+    public AudioClip GetSound(string name) => sounds.Where(data => data.name == name).First().sound;
+
+    #endregion
+
+    public void AddToPurchased(string name)
+    {
+        Enum.TryParse(name.ToUpper(), out CreatureType creatureID);
+        purchasedCreatures |= (int)creatureID;
+        OnCreaturePurchased?.Invoke(creatureID);
+    }
+
+    public bool IsPurchased(string name)
+    {
+        Enum.TryParse(name.ToUpper(), out CreatureType creatureID);
+        return IsPurchased((int)creatureID);
+    }
+
+    public void SetPurchasedCreatures(int data)
+    {
+        if (data == (int)CreatureType.NONE)
+            data = (int)CreatureType.CHICKEN;
+
+        purchasedCreatures = data;
+    }
 
     public void SetActiveCreature(string name)
     {
@@ -81,46 +119,19 @@ public class GameSettings : ScriptableObject
         OnActiveCreatureChanged?.Invoke(activeCreature);
     }
 
-    public int GetCreatureReward() => activeCreature.reward;
-
-    public Creature GetCreature(string name) => Creatures.Where(data => data.name == name).First();
-
-    public void AddToPurchased(string name)
+    public void SetRateUsShown(int value, bool savePrefs = false)
     {
-        Enum.TryParse(name.ToUpper(), out CreatureType creatureID);
-        purchasedCreatures |= (int) creatureID;
-        OnCreaturePurchased?.Invoke(creatureID);
-    }
+        rateUsShown = value;
 
-    public bool IsPurchased(string name)
-    {
-        Enum.TryParse(name.ToUpper(), out CreatureType creatureID);
-        return IsPurchased((int) creatureID);
-    }
-
-    public bool IsPurchased(int creatureID) => (purchasedCreatures & creatureID) > 0;
-
-    public Window GetScreen(string name) => windows.Where(data => data.name == name).First();
-
-    public AudioClip GetSound(string name) => sounds.Where(data => data.name == name).First().sound;
-
-    public int GetPurchasedCreatures => purchasedCreatures;
-
-    public void SetPurchasedCreatures(int data)
-    {
-        if (data == (int) CreatureType.NONE)
-            data =  (int) CreatureType.CHICKEN;
-
-        purchasedCreatures = data;
+        if (savePrefs)
+            PlayerPrefs.SetInt("rate_us", value);
     }
 
     public void UpdateHighscore(int score)
     {
-        if (score <= high_score)
-        {
+        if (score <= highScore)
             return;
-        }
 
-        high_score = score;
+        highScore = score;
     }
 }

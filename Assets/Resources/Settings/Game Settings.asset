@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5438c6c9e8f11374ea7dfb8691beb6cc, type: 3}
   m_Name: Game Settings
   m_EditorClassIdentifier: 
-  gameTime: 60
+  systemLanguage: 4
   activeCreature:
     name: chicken
     reward: 1
@@ -117,11 +117,6 @@ MonoBehaviour:
     egg: {fileID: 1074327926338737556, guid: a863bb2d2aa225e46985d9ffd04f2bf4, type: 3}
     parent: {fileID: 4207405788842372100, guid: 8b53edb3d745ec54fba75c771b0913d1, type: 3}
     inShop: {fileID: 1818550414201324473, guid: b96220822bb2c0b419fa63f3bfa8e673, type: 3}
-  windows:
-  - {fileID: 1177852122850325512, guid: c1e725a052ef1ad4a922bc581eeb63f3, type: 3}
-  - {fileID: -6510788036798779786, guid: 808eca20c5f4b484f9fe94b2edacd98c, type: 3}
-  - {fileID: 4609610259712516434, guid: af205e18e3ce5d34cb54f2fd664ce065, type: 3}
-  - {fileID: 4229465930448935591, guid: fc2f18c822be9774abf4ad2fecc242f9, type: 3}
   sounds:
   - name: coins
     sound: {fileID: 8300000, guid: 9a4c8657f278a87469d934f712809e55, type: 3}

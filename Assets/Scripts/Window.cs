@@ -12,6 +12,10 @@ public abstract class Window : MonoBehaviour
 
     public event Action<Window> OnClose;
 
+    protected virtual float onCloseDelay => 0f;
+
+    private float delayCounter = 0f;
+
     public virtual void Show()
     {
         gameObject.SetActive(true);
@@ -27,6 +31,14 @@ public abstract class Window : MonoBehaviour
         btnClose.onClick.AddListener(OnCloseClick);
     }
 
+    protected virtual void Update()
+    {
+        if (delayCounter >= float.Epsilon)
+        {
+            delayCounter -= Time.deltaTime;
+        }
+    }
+
     protected virtual void OnDisable()
     {
         btnClose.onClick.RemoveListener(OnCloseClick);
@@ -34,7 +46,12 @@ public abstract class Window : MonoBehaviour
 
     protected virtual void OnCloseClick()
     {
-        OnClose?.Invoke(this);
-        Hide();
+        if (delayCounter < float.Epsilon)
+        {
+            delayCounter = onCloseDelay;
+
+            OnClose?.Invoke(this);
+            Hide();
+        }
     }
 }

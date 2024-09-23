@@ -10,16 +10,24 @@ public class LeaderboardWindow : Window
     TextMeshProUGUI values;
     [SerializeField]
     TextMeshProUGUI highscore;
+    [SerializeField]
+    TextMeshProUGUI upperText;
+    [SerializeField]
+    TextMeshProUGUI middleText;
+    [SerializeField]
+    TextMeshProUGUI bottomText;
 
-    private const string PLAYER = "Me ♥";
-
-    private readonly string[] leaders = {"Hanna","William","Barbara","Joseph","Halyna","Iván","Lubov","Elena","Georgedan","Michael"};
+    private string[] leaders;
     private readonly int[] scores = {3456,2345,2020,2007,1989,1988,1961,1959,1280,420};
 
     private int highscoreIndex = int.MaxValue;
 
+    protected override float onCloseDelay => 2f;
+
     public override void Show()
     {
+        leaders ??= Localization.GetLocalLeaders();
+
         UpdateHighscoreIndex();
         base.Show();
     }
@@ -43,6 +51,7 @@ public class LeaderboardWindow : Window
     private void UpdateText()
     {
         string name;
+        string myName = Localization.Get(Localization.I);
         string value = string.Empty;
         var namesBuilder = new StringBuilder();
         var valueBuilder = new StringBuilder();
@@ -52,7 +61,7 @@ public class LeaderboardWindow : Window
         {
             if (i == highscoreIndex)
             {
-                name = PLAYER; value = settings.HighScore.ToString();
+                name = myName; value = settings.HighScore.ToString();
                 hasShifted = true;
             }
             else
@@ -85,5 +94,8 @@ public class LeaderboardWindow : Window
         names.SetText(namesBuilder);
         values.SetText(valueBuilder);
         highscore.SetText(settings.HighScore.ToString());
+        upperText.SetText(Localization.Get(Localization.Highscore));
+        middleText.SetText(Localization.Get(Localization.Record));
+        bottomText.SetText(Localization.Get(Localization.Continue));
     }
 }

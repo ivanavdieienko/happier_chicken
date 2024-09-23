@@ -25,6 +25,8 @@ public class GameManager : MonoBehaviour
     private int time;
     private int nextUpdate;
 
+    public SystemLanguage systemLanguage;
+
     public static GameManager Instance => instance;
 
     public void CollectReward(int multiplier = 1)
@@ -115,7 +117,7 @@ public class GameManager : MonoBehaviour
                 }
             }
         }
-        else if (Input.GetMouseButtonUp(0))
+        else if (Input.GetMouseButtonDown(0))
         {
             HandleTouch(Input.mousePosition);
         }
@@ -176,18 +178,16 @@ public class GameManager : MonoBehaviour
         }
         settings.SetActiveCreature(name);
 
-        var purchasesData = PlayerPrefs.GetInt("purchased");
-        if (purchasesData == 0) purchasesData = (int) CreatureType.CHICKEN;
-        settings.SetPurchasedCreatures(purchasesData);
-
+        settings.SetPurchasedCreatures(PlayerPrefs.GetInt("purchased"));
         settings.UpdateHighscore(PlayerPrefs.GetInt("highscore"));
+        settings.SetRateUsShown(PlayerPrefs.GetInt("rate_us"));
     }
 
     private void SaveSettings()
     {
         PlayerPrefs.SetInt("gold", settings.Gold);
         PlayerPrefs.SetString("activeCreature", currentPlayer.name);
-        PlayerPrefs.SetInt("purchased", settings.GetPurchasedCreatures);
+        PlayerPrefs.SetInt("purchased", settings.PurchasedCreatures);
         PlayerPrefs.SetInt("highscore", settings.HighScore);
     }
 
