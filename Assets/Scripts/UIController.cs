@@ -1,6 +1,5 @@
 using UnityEngine;
 using UnityEngine.UI;
-using TMPro;
 using System.Collections.Generic;
 using System.Linq;
 using System;
@@ -38,13 +37,13 @@ public class UIController : MonoBehaviour
     private Button shopButton;
 
     [SerializeField]
-    private TextMeshProUGUI eggCount;
+    private TextMesh eggCount;
 
     [SerializeField]
-    private TextMeshProUGUI totalCount;
+    private TextMesh totalCount;
 
     [SerializeField]
-    private TextMeshProUGUI goldCount;
+    private TextMesh goldCount;
 
     #endregion
 
@@ -71,15 +70,15 @@ public class UIController : MonoBehaviour
         }
     }
 
-    public void SetEggCount(int count) => eggCount.text = $"{count}";
+    public void SetEggCount(int count) => eggCount.text = ArabicFixerTool.FixLine($"{count}");
 
-    public void UpdateGoldCount() => goldCount.text = $"{settings.Gold}";
+    public void UpdateGoldCount() => goldCount.text = ArabicFixerTool.FixLine($"{settings.Gold}");
 
-    public void UpdateTime(int time) => totalCount.text = string.Format("00:{0:D2}", time);
+    public void UpdateTime(int time) => totalCount.text = ArabicFixerTool.FixLine(string.Format("00:{0:D2}", time));
 
     private Window GetWindow(WindowType type) => windows.Where(data => data.type == type).First().window;
 
-    private void UpdateBalance(int value) => goldCount.text = value.ToString();
+    private void UpdateBalance(int value) => goldCount.text = ArabicFixerTool.FixLine(value.ToString());
 
     #endregion
 
@@ -195,7 +194,7 @@ public class UIController : MonoBehaviour
 
     private void Awake()
     {
-        Localization.Initialize();
+        SetEggCount(0);
     }
 
     private void Update()

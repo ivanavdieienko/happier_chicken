@@ -1,5 +1,4 @@
 using System;
-using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -16,7 +15,7 @@ public class ShopItem : MonoBehaviour
     private GameObject priceContainer;
 
     [SerializeField]
-    private TextMeshProUGUI priceField;
+    private TextMesh priceField;
 
     private Action<ShopItem> OnClickCallback;
 
@@ -32,7 +31,7 @@ public class ShopItem : MonoBehaviour
         OnClickCallback = callback;
 
         Price = price;
-        priceField.text = price.ToString();
+        priceField.text = ArabicFixerTool.FixLine(price.ToString());
     }
 
     internal void IsActive(bool value)

@@ -1,7 +1,6 @@
 using DG.Tweening;
 using DG.Tweening.Core;
 using DG.Tweening.Plugins.Options;
-using TMPro;
 using UnityEngine;
 
 public class ShopWindow : Window
@@ -10,7 +9,7 @@ public class ShopWindow : Window
     RectTransform container;
 
     [SerializeField]
-    TextMeshProUGUI errorMessage;
+    TextMesh noGold;
 
     private TweenerCore<Color, Color, ColorOptions> errorAnimation;
 
@@ -28,21 +27,23 @@ public class ShopWindow : Window
 
         foreach (var creature in settings.Creatures)
         {
-            var shopItem = GameObject.Instantiate(creature.inShop, container).GetComponent<ShopItem>();
+            var shopItem = Instantiate(creature.inShop, container).GetComponent<ShopItem>();
 
             shopItem.name = creature.inShop.name;
             shopItem.Initialize(creature.price, settings.IsPurchased(creature.name), activeCreature.name == creature.name, OnItemClick);
         }
 
-        errorMessage.text = Localization.Get(Localization.NoGold);
+        var hintPosition = noGold.transform.position;
+        hintPosition.x = Screen.width * 0.5f;
+        noGold.transform.position = hintPosition;
 
-        ResetErrorMessage();
+        ResetNoGoldView();
     }
 
     override protected void OnDisable()
     {
         errorAnimation?.Kill();
-        ResetErrorMessage();
+        ResetNoGoldView();
     }
 
     public void OnItemClick(ShopItem item)
@@ -53,7 +54,7 @@ public class ShopWindow : Window
         }
 
         errorAnimation?.Kill();
-        ResetErrorMessage();
+        ResetNoGoldView();
 
         if (!settings.IsPurchased(item.name))
         {
@@ -64,9 +65,9 @@ public class ShopWindow : Window
             }
             else
             {
-                errorMessage.gameObject.SetActive(true);
-                errorAnimation = DOTween.ToAlpha(()=> Color.white * errorMessage.alpha, x => errorMessage.alpha = x.a, 0f, 3f);
-                errorAnimation.OnComplete(ResetErrorMessage);
+                noGold.gameObject.SetActive(true);
+                errorAnimation = DOTween.ToAlpha(()=> noGold.color, x => noGold.color = x, 0f, 3f);
+                errorAnimation.OnComplete(ResetNoGoldView);
                 return;
             }
         }
@@ -81,9 +82,11 @@ public class ShopWindow : Window
         }
     }
 
-    private void ResetErrorMessage()
+    private void ResetNoGoldView()
     {
-        errorMessage.gameObject.SetActive(false);
-        errorMessage.alpha = 1;
+        noGold.gameObject.SetActive(false);
+        Color color = noGold.color;
+        color.a = 1;
+        noGold.color = color;
     }
 }

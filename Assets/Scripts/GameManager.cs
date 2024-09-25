@@ -25,8 +25,6 @@ public class GameManager : MonoBehaviour
     private int time;
     private int nextUpdate;
 
-    public SystemLanguage systemLanguage;
-
     public static GameManager Instance => instance;
 
     public void CollectReward(int multiplier = 1)

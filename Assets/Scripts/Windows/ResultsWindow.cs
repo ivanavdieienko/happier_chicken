@@ -1,16 +1,9 @@
-using TMPro;
 using UnityEngine;
 
 public class ResultsWindow : Window
 {
     [SerializeField]
-    private TextMeshProUGUI results;
-
-    [SerializeField]
-    private TextMeshProUGUI collectx2;
-
-    [SerializeField]
-    private TextMeshProUGUI collect;
+    private TextMesh results;
 
     [SerializeField]
     private RewardedAdsButton btnCollectX2;
@@ -43,7 +36,9 @@ public class ResultsWindow : Window
 
     private void UpdateRewardsText()
     {
-        results.text = string.Format(Localization.Get(Localization.Results), eggsCollected, eggsCollected * reward * multiplier);
+        var result = string.Format(Localization.Results, eggsCollected, eggsCollected * reward * multiplier);
+        results.text = ArabicFixerTool.FixLine(result);
+        TextMeshWrapper.WrapText(results);
     }
 
     private void OnGrantReward()
@@ -72,10 +67,6 @@ public class ResultsWindow : Window
         {
             OnAdsInitialized();
         }
-
-        var collect_txt = Localization.Get(Localization.Collect);
-        collectx2.text = collect_txt;
-        collect.text = collect_txt;
     }
 
     override protected void OnEnable()
