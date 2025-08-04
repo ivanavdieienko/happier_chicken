@@ -37,7 +37,7 @@ public class AppRating : MonoBehaviour
     private IEnumerator InitReview(bool force = false)
     {
         if (_reviewManager == null) _reviewManager = new ReviewManager();
-
+    
         var requestFlowOperation = _reviewManager.RequestReviewFlow();
         yield return requestFlowOperation;
         if (requestFlowOperation.Error != ReviewErrorCode.NoError)
@@ -45,10 +45,10 @@ public class AppRating : MonoBehaviour
             if (force) DirectlyOpen();
             yield break;
         }
-
+    
         _playReviewInfo = requestFlowOperation.GetResult();
     }
-
+    
     public IEnumerator LaunchReview()
     {
         if (_playReviewInfo == null)
@@ -56,7 +56,7 @@ public class AppRating : MonoBehaviour
             if (_coroutine != null) StopCoroutine(_coroutine);
             yield return StartCoroutine(InitReview(true));
         }
-
+    
         var launchFlowOperation = _reviewManager.LaunchReviewFlow(_playReviewInfo);
         yield return launchFlowOperation;
         _playReviewInfo = null;

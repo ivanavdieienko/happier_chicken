@@ -73,3 +73,5 @@ crashlytics-build.properties
 bin/
 bin_BurstDebugInformation_DoNotShip/
 bin_BackUpThisFolder_ButDontShipItWithYourGame/
+/.idea
+/.utmp

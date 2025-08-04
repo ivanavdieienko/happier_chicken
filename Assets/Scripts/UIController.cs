@@ -38,25 +38,30 @@ public class UIController : MonoBehaviour
     private Button shopButton;
 
     [SerializeField]
+    private Button leaderboardButton;
+
+    [SerializeField]
     private TextMeshProUGUI eggCount;
 
     [SerializeField]
-    private TextMeshProUGUI totalCount;
+    private TextMeshProUGUI timer;
 
     [SerializeField]
     private TextMeshProUGUI goldCount;
 
     #endregion
 
+    #region Fields
+    
     private readonly HashSet<Window> ActiveWindows = new();
 
     private bool isPlaying;
-
-    #region Fields
+    
+    #endregion
 
     public bool IsPlaying
     {
-        get { return isPlaying; }
+        get => isPlaying;
         set
         {
             if (ActiveWindows.Count == 0)
@@ -71,17 +76,25 @@ public class UIController : MonoBehaviour
         }
     }
 
-    public void SetEggCount(int count) => eggCount.text = $"{count}";
+    public void SetEggCount(int count) => eggCount.text = $"{count.ToString()}";
 
-    public void UpdateGoldCount() => goldCount.text = $"{settings.Gold}";
+    public void UpdateGoldCount() => goldCount.text = $"{settings.Gold.ToString()}";
 
-    public void UpdateTime(int time) => totalCount.text = string.Format("00:{0:D2}", time);
+    public void UpdateTime(int time) => timer.text  = "00:" + time.ToString("D2");
 
-    private Window GetWindow(WindowType type) => windows.Where(data => data.type == type).First().window;
+    private Window GetWindow(WindowType type)
+    {
+        for (var i = 0; i < windows.Length; i++)
+        {
+            if (windows[i].type == type)
+            {
+                return windows[i].window;
+            }
+        }
+        return null;
+    }
 
     private void UpdateBalance(int value) => goldCount.text = value.ToString();
-
-    #endregion
 
     #region Start Window
 
@@ -141,13 +154,21 @@ public class UIController : MonoBehaviour
 
     #region Leaderboard
 
-    public void ShowLeaderboard()
+    public void ShowLeaderboard(bool isNewHighscore)
     {
         var window = GetWindow(WindowType.LEADERBOARD) as LeaderboardWindow;
-        window.OnClose += OnLeaderboardClose;
+        window.SetNewHighScore(isNewHighscore);
         window.Show();
-
         ActiveWindows.Add(window);
+
+        window.OnClose += OnLeaderboardClose;
+    }
+
+    private void OnLeaderboardClick()
+    {
+        Time.timeScale = 0;
+
+        ShowLeaderboard(false);
     }
 
     private void OnLeaderboardClose(Window leaderboard)
@@ -159,7 +180,10 @@ public class UIController : MonoBehaviour
             ActiveWindows.Remove(leaderboard);
         }
 
-        ShowResults(settings.HighScore);
+        if (((LeaderboardWindow)leaderboard).IsNewHighscore)
+            ShowResults(settings.HighScore);
+        else
+            Time.timeScale = 1;
     }
 
     #endregion
@@ -193,32 +217,32 @@ public class UIController : MonoBehaviour
 
     #region Unity Lifecycle
 
-    private void Awake()
+    private void Start()
     {
         Localization.Initialize();
     }
 
     private void Update()
     {
-        if (Input.GetKey(KeyCode.LeftControl) && Input.GetKey(KeyCode.LeftAlt) && Input.GetKeyDown(KeyCode.K))
+        if (Input.GetKeyDown(KeyCode.K))
         {
             settings.Gold += 1000;
 
             UpdateGoldCount();
         }
-        else if (Input.GetKey(KeyCode.LeftControl) && Input.GetKey(KeyCode.LeftAlt) && Input.GetKeyDown(KeyCode.D))
+        else if (Input.GetKeyDown(KeyCode.D))
         {
             settings.Gold += 10000;
 
             UpdateGoldCount();
         }
-        else if (Input.GetKey(KeyCode.LeftControl) && Input.GetKey(KeyCode.LeftAlt) && Input.GetKeyDown(KeyCode.T))
+        else if (Input.GetKeyDown(KeyCode.T))
         {
             settings.Gold += 100000;
 
             UpdateGoldCount();
         }
-        else if (Input.GetKey(KeyCode.LeftControl) && Input.GetKey(KeyCode.LeftAlt) && Input.GetKeyDown(KeyCode.M))
+        else if (Input.GetKeyDown(KeyCode.M))
         {
             settings.Gold += 1000000;
 
@@ -228,12 +252,14 @@ public class UIController : MonoBehaviour
 
     private void OnEnable()
     {
+        leaderboardButton.onClick.AddListener(OnLeaderboardClick);
         shopButton.onClick.AddListener(OnShopClick);
         settings.OnGoldChanged += UpdateBalance;
     }
 
     private void OnDisable()
     {
+        leaderboardButton.onClick.RemoveListener(OnLeaderboardClick);
         shopButton.onClick.RemoveListener(OnShopClick);
         settings.OnGoldChanged -= UpdateBalance;
     }

@@ -40,7 +40,7 @@ public static class Localization
             [Market] = "Come here for a new animal >"
         };
 
-        currentLocale = /*GameManager.Instance.systemLanguage /*/Application.systemLanguage switch 
+        currentLocale = Application.systemLanguage switch 
         {
             SystemLanguage.English => defaultLocale,
             SystemLanguage.Basque => new Dictionary<string, string>
@@ -227,16 +227,16 @@ public static class Localization
             {
                 [I] = "Я ♥",
                 [Intro] = "Haтиcни, щoб пoчaти клacти яйця",
-                [Market] = "3axoдь cюди зa нoвoю твapинкoю >",
                 [NoGold] = "Heдocтaтньo зoлoтиx мoнeт",
                 [Results] = "{0} яєць = {1} зoлoтиx мoнeт",
-                [Collect] = "3IБPATИ",
+                [Collect] = "ЗІБРАТИ",
                 [Highscore] = "HOBИЙ PEKOPД!!!",
                 [Continue] = "Haтиcни, щoб пpoдoвжити",
                 [Record] = "Яєць зiбpaнo зa xвилинy:",
+                [Market] = "3axoдь cюди зa нoвoю твapинкoю >",
             },
             /*SystemLanguage.Arabic => new Dictionary<string, string>
-            {
+            {0123456789×2
                 [I] = "أنا ♥",
                 [Intro] = "اضغط لبدء وضع البيض",
                 [NoGold] = "لا توجد عملات ذهبية كافية",
@@ -321,14 +321,15 @@ public static class Localization
 
     public static string Get(string key)
     {
-        if (currentLocale.ContainsKey(key))
-            return currentLocale[key];
+        if (currentLocale.TryGetValue(key, out var stringValue))
+        {
+            return stringValue;
+        }
         else
         {
-            Debug.LogError($"Can't find value of key: {key} for locale: {Application.systemLanguage}");
+            Debug.LogError($"Can't find value of key: {key} for locale: {Application.systemLanguage.ToString()}");
             return defaultLocale[key];
         }
-            
     }
 
     public static string[] GetLocalLeaders(SystemLanguage language = default)
@@ -354,7 +355,7 @@ public static class Localization
             SystemLanguage.Portuguese => new string[] { "João", "Maria", "Francisco", "Leonor", "Santiago", "Matilde", "Afonso", "Beatriz", "Tomás", "Carolina" },
             SystemLanguage.Spanish => new string[] { "Ana", "Júlia", "Noa", "Jose", "Miguél", "Martina", "Roberto", "Enrique", "Andre", "Ainhoa" },
             SystemLanguage.Turkish => new string[] { "Yusuf", "Zeynep", "Mustafa", "Elif", "Ahmet", "Meryem", "Mehmet", "Ayşe", "Hasan", "Fatma" },
-            SystemLanguage.Ukrainian => new string[] { "Biктop", "Дiaнa", "Bлaд", "Miлaнa", "Eмiлiя", "Baня", "Гaлинa", "Tapac", "Λєpa", "Aндpiй" },
+            SystemLanguage.Ukrainian => new string[] { "Дiaнa", "Bлaд", "Дaнилo", "Eмiлiя", "Biктop", "Гaлинa", "Tapac", "Miлaнa", "Aндpiй", "Coлoмiя" },
             SystemLanguage.Russian => new string[] { "Диaнa", "Ивaн", "Λeнa", "Maкcим", "Λюбoвь", "Bлaд", "Toлик", "Bиктop", "Mилaнa", "Aндpeй" },
             SystemLanguage.Arabic => new string[] { "Muhammad", "Ali", "Omar", "Hassan", "Kareem", "Fatima", "Aisha", "Layla", "Said", "Ibrahim" },
             _ => defaultNames

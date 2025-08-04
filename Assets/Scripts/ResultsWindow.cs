@@ -43,7 +43,8 @@ public class ResultsWindow : Window
 
     private void UpdateRewardsText()
     {
-        results.text = string.Format(Localization.Get(Localization.Results), eggsCollected, eggsCollected * reward * multiplier);
+        var rewardText = eggsCollected * reward * multiplier;
+        results.text = string.Format(Localization.Get(Localization.Results), eggsCollected.ToString(), rewardText.ToString());
     }
 
     private void OnGrantReward()

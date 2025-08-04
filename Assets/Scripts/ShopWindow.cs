@@ -64,6 +64,7 @@ public class ShopWindow : Window
             }
             else
             {
+                GameManager.Instance.PlaySound("oh-no");
                 errorMessage.gameObject.SetActive(true);
                 errorAnimation = DOTween.ToAlpha(()=> Color.white * errorMessage.alpha, x => errorMessage.alpha = x.a, 0f, 3f);
                 errorAnimation.OnComplete(ResetErrorMessage);

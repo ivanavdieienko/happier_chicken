@@ -1,9 +1,0 @@
-[submodule "Assets/Plugins/in-app-review"]
-	path = Assets/Plugins/in-app-review
-	url = https://github.com/google-unity/in-app-review.git
-[submodule "Assets/Plugins/google-play-core"]
-	path = Assets/Plugins/google-play-core
-	url = https://github.com/google-unity/google-play-core.git
-[submodule "Assets/Plugins/google-play-common"]
-	path = Assets/Plugins/google-play-common
-	url = https://github.com/google-unity/google-play-common.git

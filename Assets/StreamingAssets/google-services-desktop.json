@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "487521485262",
+    "project_id": "happy-chicken-75862",
+    "storage_bucket": "happy-chicken-75862.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:487521485262:android:d7e90dce9a4372368f6b9f",
+        "android_client_info": {
+          "package_name": "com.e1.offday.n.co.HappierChicken"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAsU3HScw8DsegN0XljxqoB2HRNsyw6tYw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

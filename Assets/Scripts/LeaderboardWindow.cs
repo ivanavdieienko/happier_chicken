@@ -18,11 +18,13 @@ public class LeaderboardWindow : Window
     TextMeshProUGUI bottomText;
 
     private string[] leaders;
-    private readonly int[] scores = {3456,2345,2020,2007,1989,1988,1961,1959,1280,420};
+    private static readonly int[] scores = {3456,2345,2020,2007,1989,1988,1961,1959,1280,420};
 
-    private int highscoreIndex = int.MaxValue;
+    private int highscoreIndex;
 
-    protected override float onCloseDelay => 2f;
+    public bool IsNewHighscore { get; private set; }
+
+    protected override float onCloseDelay => IsNewHighscore ? 2f : 0f;
 
     public override void Show()
     {
@@ -30,6 +32,14 @@ public class LeaderboardWindow : Window
 
         UpdateHighscoreIndex();
         base.Show();
+    }
+
+    public void SetNewHighScore(bool value)
+    {
+        // highscore.gameObject.SetActive(value);
+        upperText.gameObject.SetActive(value);
+
+        IsNewHighscore = value;
     }
 
     private void UpdateHighscoreIndex()
@@ -44,7 +54,7 @@ public class LeaderboardWindow : Window
             }
         }
 
-        highscoreIndex = index < highscoreIndex ? index : highscoreIndex;
+        highscoreIndex = index >= 0 ? index : int.MaxValue;
         UpdateText();
     }
 

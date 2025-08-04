@@ -80,11 +80,31 @@ public class GameSettings : ScriptableObject
 
     public int GetCreatureReward() => activeCreature.reward;
 
-    public Creature GetCreature(string name) => Creatures.Where(data => data.name == name).First();
+    public Creature GetCreature(string name) //=> Creatures.First(data => data.name == name);
+    {
+        for (var i = 0; i < Creatures.Length; i++)
+        {
+            if (Creatures[i].name == name)
+            {
+                return Creatures[i];
+            }
+        }
+        return default;
+    }
 
     public bool IsPurchased(int creatureID) => (purchasedCreatures & creatureID) > 0;
 
-    public AudioClip GetSound(string name) => sounds.Where(data => data.name == name).First().sound;
+    public AudioClip GetSound(string name) //=> sounds.First(data => data.name == name).sound;
+    {
+        for (var i = 0; i < sounds.Length; i++)
+        {
+            if (sounds[i].name == name)
+            {
+                return sounds[i].sound;
+            }
+        }
+        return null;
+    }
 
     #endregion
 
